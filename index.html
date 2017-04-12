@@ -1,4 +1,5 @@
 
+
 <!DOCTYPE html>
 <html>
 <head>
@@ -391,6 +392,7 @@ $('#generateconfig').click(function()
     configStr = configStr + "[wlan0]";
     configStr = configStr + "\r\n";
     configStr = configStr + "ssid=" + $('#ssid').val() + "\r\n";
+    if($('#passphrase').val() != "")
     configStr = configStr + "passphrase=" + $('#passphrase').val() + "\r\n";
     if($('#wifidhcp').is(":checked") == true)
     {
