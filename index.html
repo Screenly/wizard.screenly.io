@@ -49,14 +49,14 @@
       margin-top: 5px;
   }
   </style>
-  <title>Screenly Configuration Settings</title>
+  <title>Screenly Configuration Wizard</title>
 </head>
 <body>
   <div class="container">
     <div class="row">
       <div class="row">
         <div class="col-md-12">
-          <h1>Screenly Configuration Settings</h1>
+          <h1>Screenly Configuration Wizard</h1>
         </div>
       </div>
       <div class="row">
@@ -199,7 +199,7 @@
         </div>
       </div>
       <div class="col-md-12 text-center">
-        <button class="btn btn-primary" id="generateconfig" type="submit" name="submit">Generate configuration</button>
+        <button class="btn btn-primary" id="generateconfig" type="submit" name="submit">Generate config file</button>
       </div>
     </div>
   </div>
@@ -510,7 +510,7 @@ $('#generateconfig').click(function()
   {
     if(configStr.length > 5)
     {
-      alert("Your config file is almost ready!\n\nYour browser will start to download the file as soon as you press OK below.Save the file on to the boot partition of your SD card and make sure to name it network.ini\n\n");
+      alert("Your config file is almost ready!\n\nYour browser will start to download the file as soon as you press OK below. Save the file on to the boot partition of your SD card and make sure to name it network.ini\n\n");
       saveFile("network.ini", configStr);
     }
     else {
