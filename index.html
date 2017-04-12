@@ -40,16 +40,8 @@
     display: none;
   }
 
-  span.glyphicon {
-    color: #008000;
-  }
-
   span.glyphicon:hover {
     cursor: pointer;
-  }
-
-  span.glyphicon.glyphicon-minus-sign{
-    color:#ff3333;
   }
 
   #ntp-addbutton , #dns-addbutton, .remove-button  {
@@ -484,7 +476,7 @@ $('#generateconfig').click(function()
       var dnsid = "dns_server_" + (i+1);
       if(!validateIPaddress(itm.value))
       {
-        validation_errors.push({ "key": dnsid, 'message': 'You have entered an invalid IP address/FQDN' });
+        validation_errors.push({ "key": dnsid, 'message': 'You have entered an invalid IP address' });
       }
       if(i > 0)
       {
