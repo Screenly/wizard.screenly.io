@@ -1,24 +1,15 @@
 function validateIPaddress(ipaddress) {
-  if (/^(25[0-5]|2[0-4][0-9]|[01]?[0-9][0-9]?)\.(25[0-5]|2[0-4][0-9]|[01]?[0-9][0-9]?)\.(25[0-5]|2[0-4][0-9]|[01]?[0-9][0-9]?)\.(25[0-5]|2[0-4][0-9]|[01]?[0-9][0-9]?)$/.test(ipaddress)) {
-    return (true);
-  }
-  return (false);
+  return (/^(25[0-5]|2[0-4][0-9]|[01]?[0-9][0-9]?)\.(25[0-5]|2[0-4][0-9]|[01]?[0-9][0-9]?)\.(25[0-5]|2[0-4][0-9]|[01]?[0-9][0-9]?)\.(25[0-5]|2[0-4][0-9]|[01]?[0-9][0-9]?)$/.test(ipaddress));
 }
 
 function validateFQDN(fqdn)
 {
-  if (/^([a-z0-9]+(-[a-z0-9]+)*\.)+[a-z]{2,}$/.test(fqdn)) {
-    return (true);
-  }  return (false);
-
+  return (/^([a-z0-9]+(-[a-z0-9]+)*\.)+[a-z]{2,}$/.test(fqdn));
 }
 
 function validateNetmask(netmask)
 {
-  if (/^(254|252|248|240|224|192|128)\.0\.0\.0|255\.(254|252|248|240|224|192|128|0)\.0\.0|255\.255\.(254|252|248|240|224|192|128|0)\.0|255\.255\.255\.(254|252|248|240|224|192|128|0)$/.test(netmask)) {
-    return (true);
-  }
-  return (false);
+  return (/^(254|252|248|240|224|192|128)\.0\.0\.0|255\.(254|252|248|240|224|192|128|0)\.0\.0|255\.255\.(254|252|248|240|224|192|128|0)\.0|255\.255\.255\.(254|252|248|240|224|192|128|0)$/.test(netmask));
 }
 
 function convertNetmaskToCIDR(netmask) {
@@ -48,17 +39,9 @@ function saveFile(filename, data) {
 }
 
 $('input[name=screenlyversion]').prop('checked', false);
-$('#config-options').hide();
 
-$('#wifi-fields').hide();
-$('#wired-fields').hide();
-$('#dns-fields').hide();
-$('#ntp-fields').hide();
-$('#common_errors').hide();
-$('#wifi-no-dhcp-fields').hide();
-$('#wired-no-dhcp-fields').hide();
-$('input[name=wifidhcp]').prop('checked', 'checked');
-$('input[name=wireddhcp]').prop('checked', 'checked');
+$('#config-options, #wifi-fields, #wired-fields, #dns-fields, #ntp-fields, #common_errors, #wifi-no-dhcp-fields, #wired-no-dhcp-fields').hide();
++$('input[name=wifidhcp], input[name=wireddhcp]').prop('checked', 'checked');
 
 var screenlyVersion = 0;
 
@@ -88,7 +71,7 @@ $('input[name=screenlyversion]').change(function() {
 });
 
 $('input[name=wifi]').change(function() {
-  if($(this).is(':checked'))
+  if(this.checked)
   {
     console.log("wifi");
     $('#wifi-fields').show();
@@ -100,7 +83,7 @@ $('input[name=wifi]').change(function() {
 
 
 $('input[name=wifidhcp]').change(function() {
-  if($(this).is(':checked'))
+  if(this.checked)
   {
     console.log("wifidhcp");
     $('#wifi-no-dhcp-fields').hide();
@@ -111,7 +94,7 @@ $('input[name=wifidhcp]').change(function() {
 });
 
 $('input[name=wireddhcp]').change(function() {
-  if($(this).is(':checked'))
+  if(this.checked)
   {
     console.log("wireddhcp");
     $('#wired-no-dhcp-fields').hide();
@@ -122,7 +105,7 @@ $('input[name=wireddhcp]').change(function() {
 });
 
 $('input[name=wired]').change(function() {
-  if($(this).is(':checked'))
+  if(this.checked)
   {
     console.log("wired");
     $('#wired-fields').show();
@@ -132,7 +115,7 @@ $('input[name=wired]').change(function() {
   }
 });
 $('input[name=ntp]').change(function() {
-  if($(this).is(':checked'))
+  if(this.checked)
   {
     console.log("ntp");
     $('#ntp-fields').show();
@@ -142,7 +125,7 @@ $('input[name=ntp]').change(function() {
   }
 });
 $('input[name=dns]').change(function() {
-  if($(this).is(':checked'))
+  if(this.checked)
   {
     console.log("dns");
     $('#dns-fields').show();
@@ -158,7 +141,7 @@ $('#ntp-addbutton').click(function() {
 
   if($('#p_scents1 .add-ntp-server') != undefined)
   i = $('#p_scents1 .add-ntp-server').length + 2;
-  $('<div class="form-group add-ntp-server" id="row_ntp_server_' + i +'"><label for="ntp_server_' + i +'" class="control-label col-xs-3">Server ' + i +'</label><div class="col-xs-6"><input type="text" class="form-control" id="ntp_server_' + i +'" name="ntp_server_' + i +'"></div><span class="remove-button glyphicon glyphicon-minus-sign" id="ntp_remove_server_' + i +'"></span></div></div>').appendTo(scntDiv);
+  $('<div class="form-group add-ntp-server" id="row_ntp_server_' + i +'"><label for="ntp_server_' + i +'" class="control-label col-xs-3">Server ' + i +'</label><div class="col-xs-6"><input type="text" class="form-control" id="ntp_server_' + i +'" name="ntp_server_' + i +'"></div><span class="app-btn glyphicon glyphicon-minus-sign" id="ntp_remove_server_' + i +'"></span></div></div>').appendTo(scntDiv);
   $('#ntp_remove_server_' + i).click(function() {
     $('#row_ntp_server_'+ i).remove();
     return false;
@@ -172,7 +155,7 @@ $('#dns-addbutton').click(function() {
 
   if($('#p_scents2 .add-dns-server') != undefined)
   i = $('#p_scents2 .add-dns-server').length + 2;
-  $('<div class="form-group add-dns-server" id="row_dns_server_' + i +'"><label for="dns_server_' + i +'" class="control-label col-xs-3">Server ' + i +'</label><div class="col-xs-6"><input type="text" class="form-control" id="dns_server_' + i +'" name="dns_server_' + i +'"></div><span class="remove-button glyphicon glyphicon-minus-sign" id="dns_remove_server_' + i +'"></span></div></div>').appendTo(scntDiv);
+  $('<div class="form-group add-dns-server" id="row_dns_server_' + i +'"><label for="dns_server_' + i +'" class="control-label col-xs-3">Server ' + i +'</label><div class="col-xs-6"><input type="text" class="form-control" id="dns_server_' + i +'" name="dns_server_' + i +'"></div><span class="app-btn glyphicon glyphicon-minus-sign" id="dns_remove_server_' + i +'"></span></div></div>').appendTo(scntDiv);
   $('#dns_remove_server_' + i).click(function() {
     $('#row_dns_server_'+ i).remove();
     return false;
@@ -430,23 +413,26 @@ $('#generateconfig').click(function()
   {
     if(v1Str.length > 5 && screenlyVersion != 0) 
     {
+      var saveModalText = "Please select options before generating configuration";
       if(screenlyVersion == 1)
       {
         var configStr = v1Str;
-        var configFileName = "network.ini"
-        var alertMessage = "Your config file is almost ready!\n\nYour browser will start to download the file as soon as you press OK below. Save the file on to the boot partition of your SD card and make sure to name it " + configFileName + "\n\n";
+        var configFileName = "network.ini";
+        saveModalText = "Your config file is almost ready!\n\nYour browser will start to download the file as soon as you press OK below. Save the file on to the boot partition of your SD card and make sure to name it " + configFileName + "\n\n";
       }
       else
       {
         var configStr = v2Str;
-        var configFileName = "network.yaml"
-        var alertMessage = "Your config file is almost ready!\n\nYour browser will start to download the file as soon as you press OK below. Save the file onto a USB stick and insert it into your Raspberry Pi. \n\n";
+        var configFileName = "network.yaml";
+        saveModalText = "Your config file is almost ready!\n\nYour browser will start to download the file as soon as you press OK below. Save the file onto a USB stick and insert it into your Raspberry Pi. \n\n";
       }
-      alert(alertMessage);
+      document.getElementById("save-modal-text").innerHTML = saveModalText;
+      $('#saveModal').modal('show');
       saveFile(configFileName, configStr);
     }
     else {
-      alert("Please select options before generating configuration");
+      document.getElementById("save-modal-text").innerHTML = saveModalText;
+      $('#saveModal').modal('show');
     }
   }
 });

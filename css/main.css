@@ -1,42 +1,42 @@
 body {
-    background-color: #ffffff;
-  }
+  background-color: #ffffff;
+}
 
-  h1 {
-    text-align: center;
-  }
+h1 {
+  text-align: center;
+}
 
-  .row {
-    padding: 0px;
-  }
+.row {
+  padding: 0px;
+}
 
-  .controls {
-    text-indent: 40px;
-    padding: 20px;
-  }
+.controls {
+  text-indent: 40px;
+  padding: 20px;
+}
 
-  .form-control {
-    border:1px solid #555555;
-    border-radius: 0px;
-  }
+.form-control {
+  border:1px solid #555555;
+  border-radius: 0px;
+}
 
-  .form-horizontal {
-    margin-left: 40px;
-  }
+.form-horizontal {
+  margin-left: 40px;
+}
 
-  .control-label.col-md-3 {
-    text-align: left;
-  }
+.control-label.col-md-3 {
+  text-align: left;
+}
 
-  #wifi-fields. #wired-fields, #ntp-fields, #dns-fields {
-    display: none;
-  }
+#wifi-fields. #wired-fields, #ntp-fields, #dns-fields {
+  display: none;
+}
 
-  span.glyphicon:hover {
-    cursor: pointer;
-  }
+span.glyphicon:hover {
+  cursor: pointer;
+}
 
-  #ntp-addbutton , #dns-addbutton, .remove-button  {
-      vertical-align: middle;
-      margin-top: 5px;
-  }
+.app-btn {
+    vertical-align: middle;
+    margin-top: 5px;
+}
