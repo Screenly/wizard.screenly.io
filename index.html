@@ -1,539 +1,188 @@
+---
+layout: default
+title: Screenly Configuration Wizard (Beta)
+---
 
-
-<!DOCTYPE html>
-<html>
-<head>
-  <meta charset="UTF-8">
-  <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css" integrity="sha384-BVYiiSIFeK1dGmJRAkycuHAHRg32OmUcww7on3RYdg4Va+PmSTsz/K68vbdEjh4u" crossorigin="anonymous">
-  <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap-theme.min.css" integrity="sha384-rHyoN1iRsVXV4nD0JutlnGaslCJuC7uwjduW9SVrLvRYooPp2bWYgmgJQIXwl/Sp" crossorigin="anonymous">
-  <style>
-  body {
-    background-color: #ffffff;
-  }
-
-  h1 {
-    text-align: center;
-  }
-
-  .row {
-    padding: 0px;
-  }
-
-  .controls {
-    text-indent: 40px;
-    padding: 20px;
-  }
-
-  .form-control {
-    border:1px solid #555555;
-    border-radius: 0px;
-  }
-
-  .form-horizontal {
-    margin-left: 40px;
-  }
-
-  .control-label.col-md-3 {
-    text-align: left;
-  }
-
-  #wifi-fields. #wired-fields, #ntp-fields, #dns-fields {
-    display: none;
-  }
-
-  span.glyphicon:hover {
-    cursor: pointer;
-  }
-
-  #ntp-addbutton , #dns-addbutton, .remove-button  {
-      vertical-align: middle;
-      margin-top: 5px;
-  }
-  </style>
-  <title>Screenly Configuration Wizard (Beta)</title>
-  <!-- Google Tag Manager -->
-  <script>(function(w,d,s,l,i){w[l]=w[l]||[];w[l].push({'gtm.start':
-new Date().getTime(),event:'gtm.js'});var f=d.getElementsByTagName(s)[0],
-j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
-'https://www.googletagmanager.com/gtm.js?id='+i+dl;f.parentNode.insertBefore(j,f);
-})(window,document,'script','dataLayer','GTM-M52CH4L');</script>
-  <!-- End Google Tag Manager -->
-</head>
-<body>
-  <!-- Google Tag Manager (noscript) -->
-  <noscript><iframe src="https://www.googletagmanager.com/ns.html?id=GTM-M52CH4L"
-      height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
-  <!-- End Google Tag Manager (noscript) -->
-  <div class="container">
-    <div class="row">
-      <div class="row">
-        <div class="col-md-12">
-          <h1>Screenly Configuration Wizard (Beta)</h1>
+<div class="row">
+  <div class="col-xs-12">
+    <h1>Screenly Configuration Wizard (Beta)</h1>
+  </div>
+</div>
+<div class="row">
+  <div id="common_errors" name="common_errors" class="alert alert-danger alert-dismissible" role="alert">
+  </div>
+</div>
+<div class="jumbotron">
+  <p>Screenly Configuration Wizard is a tool for help generating a network configuration file, which are used in <a href='https://www.screenly.io'>Screenly Pro</a> to configure things like networking and DNS on your Raspberry Pi.</p>
+</div>
+<div class="row">
+  <div class="col-md-6">
+    <div class="form-group">
+      <input id="screenlyv1" name="screenlyversion" value="v1" type="radio" title="Select for the current production version of Screenly Pro">
+      <label for="screenlyv1">Screenly v1</label>
+    </div>
+  </div>
+  <div class="col-md-6">
+    <div class="form-group">
+      <input id="screenlyv2" name="screenlyversion" value="v2" type="radio" title="Select for the next generation player (a.k.a. Screenly v2)">
+      <label for="screenlyv2">Screenly v2</label>
+    </div>
+  </div>
+</div>
+<div id="config-options">
+  <div class="row">
+    <div class="col-xs-12">
+      <div class="form-group">
+        <input id = "wifi" type="checkbox" name="wifi">
+        <label for = "wifi" >Configure WiFi</label>
+      </div>
+    </div>
+    <div id = "wifi-fields" class="form-horizontal">
+      <div class="col-xs-12">
+        <div class="form-group">
+          <label for="ssid" class="control-label col-md-3">SSID</label>
+          <div class="col-md-6">
+            <input type="text" class="form-control" id="ssid" name="ssid">
+          </div>
+        </div>
+        <div class="form-group">
+          <label for="passphrase"class="control-label col-md-3">Passphrase</label>
+          <div class="col-md-6">
+            <input type="text" class="form-control" id="passphrase" name="passphrase">
+          </div>
         </div>
       </div>
-      <div class="row">
-        <div id="common_errors" name="common_errors" class="alert alert-danger alert-dismissible" role="alert">
+
+      <div class="col-xs-12">
+        <div class="form-group">
+          <input id = "wifidhcp" type="checkbox" name="wifidhcp">
+          <label for = "wifidhcp">Use DHCP</label>
         </div>
-      </div>
-      <div class="jumbotron">
-        <p>Screenly Configuration Wizard is a tool for help generating <code>network.ini</code> files, which are used in <a href='https://www.screenly.io'>Screenly Pro</a> to configure things like networking and DNS on your Raspberry Pi.</p>
-      </div>
-      <div class="row">
-        <div class="col-md-12">
+        <div id="wifi-no-dhcp-fields">
           <div class="form-group">
-            <input id = "wifi" type="checkbox" name="wifi">
-            <label for = "wifi" >Configure WiFi</label>
-          </div>
-        </div>
-        <div id = "wifi-fields" class="form-horizontal">
-          <div class="col-md-12">
-            <div class="form-group">
-              <label for="ssid" class="control-label col-md-3">SSID</label>
-              <div class="col-md-6">
-                <input type="text" class="form-control" id="ssid" name="ssid">
-              </div>
-            </div>
-            <div class="form-group">
-              <label for="passphrase"class="control-label col-md-3">Passphrase</label>
-              <div class="col-md-6">
-                <input type="text" class="form-control" id="passphrase" name="passphrase">
-              </div>
+            <label for="ssid" class="control-label col-md-3">IP</label>
+            <div class="col-md-6">
+              <input type="text" class="form-control" id="wifiip" name="wifiip">
             </div>
           </div>
-
-          <div class="col-md-12">
-            <div class="form-group">
-              <input id = "wifidhcp" type="checkbox" name="wifidhcp">
-              <label for = "wifidhcp">Use DHCP</label>
-            </div>
-            <div id="wifi-no-dhcp-fields">
-              <div class="form-group">
-                <label for="ssid" class="control-label col-md-3">IP</label>
-                <div class="col-md-6">
-                  <input type="text" class="form-control" id="wifiip" name="wifiip">
-                </div>
-              </div>
-              <div class="form-group">
-                <label for="netmask"class="control-label col-md-3">Netmask</label>
-                <div class="col-md-6">
-                  <input type="text" class="form-control" id="wifinetmask" name="wifinetmask">
-                </div>
-              </div>
-              <div class="form-group">
-                <label for="gateway"class="control-label col-md-3">Gateway</label>
-                <div class="col-md-6">
-                  <input type="text" class="form-control" id="wifigateway" name="wifigateway">
-                </div>
-              </div>
-            </div>
-          </div>
-          <div class="col-md-12">
-            <div class="form-group">
-              <input id = "hiddenssid" type="checkbox" name="hiddenssid" />
-              <label for="hiddenssid">Hidden SSID</label>
-            </div>
-          </div>
-        </div>
-      </div>
-
-      <div class="row">
-        <div class="col-md-12">
           <div class="form-group">
-            <input id = "wired" type="checkbox" name="wired">
-            <label for = "wired" >Configure wired connection</label>
-          </div>
-        </div>
-        <div id = "wired-fields" class="form-horizontal">
-          <div class="col-md-12">
-            <div class="form-group">
-              <input id = "wireddhcp" type="checkbox" name="wireddhcp">
-              <label for = "wireddhcp">Use DHCP</label>
-            </div>
-            <div id="wired-no-dhcp-fields">
-              <div class="form-group">
-                <label for="ssid" class="control-label col-md-3">IP</label>
-                <div class="col-md-6">
-                  <input type="text" class="form-control" id="wiredip" name="wiredip">
-                </div>
-              </div>
-              <div class="form-group">
-                <label for="netmask"class="control-label col-md-3">Netmask</label>
-                <div class="col-md-6">
-                  <input type="text" class="form-control" id="wirednetmask" name="wirednetmask">
-                </div>
-              </div>
-              <div class="form-group">
-                <label for="gateway"class="control-label col-md-3">Gateway</label>
-                <div class="col-md-6">
-                  <input type="text" class="form-control" id="wiredgateway" name="wiredgateway">
-                </div>
-              </div>
+            <label for="netmask"class="control-label col-md-3">Netmask</label>
+            <div class="col-md-6">
+              <input type="text" class="form-control" id="wifinetmask" name="wifinetmask">
             </div>
           </div>
-        </div>
-      </div>
-      <div class="row">
-        <div class="col-md-12">
           <div class="form-group">
-            <input id="ntp" class="checkbox-custom" type="checkbox" name="ntp">
-            <label for="ntp">Configure NTP settings</label>
-          </div>
-          <div id = "ntp-fields" class="form-horizontal">
-            <div class="form-group">
-              <label for="ntp_server_1" class="control-label col-xs-3">Server 1</label>
-              <div class="col-xs-6">
-                <input type="text" class="form-control" id="ntp_server_1" name="ntp_server_1">
-              </div>
-              <span id="ntp-addbutton"  class="glyphicon glyphicon-plus-sign" aria-hidden="true"></span>
-            </div>
-
-            <div id="p_scents1">
-
+            <label for="gateway"class="control-label col-md-3">Gateway</label>
+            <div class="col-md-6">
+              <input type="text" class="form-control" id="wifigateway" name="wifigateway">
             </div>
           </div>
         </div>
       </div>
-      <div class="row">
-        <div class="col-md-12">
-          <div class="form-group">
-            <input id="dns" class="checkbox-custom" type="checkbox" name="dns">
-            <label for="dns">Configure DNS settings</label>
-          </div>
-          <div id = "dns-fields" class="form-horizontal">
-            <div class="form-group">
-              <label for="dns_server_1"class="control-label col-xs-3">Server 1</label>
-              <div class="col-xs-6">
-                <input type="text" class="form-control" id="dns_server_1" name="dns_server_1">
-              </div>
-                <span id="dns-addbutton" class="glyphicon glyphicon-plus-sign" aria-hidden="true"></span>
-            </div>
-            <div id="p_scents2">
-
-            </div>
-          </div>
+      <div class="col-xs-12">
+        <div class="form-group">
+          <input id = "hiddenssid" type="checkbox" name="hiddenssid" />
+          <label for="hiddenssid">Hidden SSID</label>
         </div>
-      </div>
-      <div class="col-md-12 text-center">
-        <button class="btn btn-primary" id="generateconfig" type="submit" name="submit">Generate config file</button>
       </div>
     </div>
   </div>
-</body>
-<script src="https://code.jquery.com/jquery-3.2.1.min.js" integrity="sha256-hwg4gsxgFZhOsEEamdOYGBf13FyQuiTwlAQgxVSNgt4=" crossorigin="anonymous"></script>
-<script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js" integrity="sha384-Tc5IQib027qvyjSMfHjOMaLkfuWVxZxUPnCJA7l2mCWNIpG9mGCD8wGNIcPD7Txa" crossorigin="anonymous"></script>
-<script>
 
+  <div class="row">
+    <div class="col-xs-12">
+      <div class="form-group">
+        <input id = "wired" type="checkbox" name="wired">
+        <label for = "wired" >Configure wired connection</label>
+      </div>
+    </div>
+    <div id = "wired-fields" class="form-horizontal">
+      <div class="col-xs-12">
+        <div class="form-group">
+          <input id = "wireddhcp" type="checkbox" name="wireddhcp">
+          <label for = "wireddhcp">Use DHCP</label>
+        </div>
+        <div id="wired-no-dhcp-fields">
+          <div class="form-group">
+            <label for="ssid" class="control-label col-md-3">IP</label>
+            <div class="col-md-6">
+              <input type="text" class="form-control" id="wiredip" name="wiredip">
+            </div>
+          </div>
+          <div class="form-group">
+            <label for="netmask"class="control-label col-md-3">Netmask</label>
+            <div class="col-md-6">
+              <input type="text" class="form-control" id="wirednetmask" name="wirednetmask">
+            </div>
+          </div>
+          <div class="form-group">
+            <label for="gateway"class="control-label col-md-3">Gateway</label>
+            <div class="col-md-6">
+              <input type="text" class="form-control" id="wiredgateway" name="wiredgateway">
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+  <div class="row" id="ntp-row">
+    <div class="col-xs-12">
+      <div class="form-group">
+        <input id="ntp" class="checkbox-custom" type="checkbox" name="ntp">
+        <label for="ntp">Configure NTP settings</label>
+      </div>
+      <div id = "ntp-fields" class="form-horizontal">
+        <div class="form-group">
+          <label for="ntp_server_1" class="control-label col-xs-3">Server 1</label>
+          <div class="col-xs-6">
+            <input type="text" class="form-control" id="ntp_server_1" name="ntp_server_1">
+          </div>
+          <span id="ntp-addbutton" class="app-btn glyphicon glyphicon-plus-sign" aria-hidden="true"></span>
+        </div>
 
-function validateIPaddress(ipaddress) {
-  if (/^(25[0-5]|2[0-4][0-9]|[01]?[0-9][0-9]?)\.(25[0-5]|2[0-4][0-9]|[01]?[0-9][0-9]?)\.(25[0-5]|2[0-4][0-9]|[01]?[0-9][0-9]?)\.(25[0-5]|2[0-4][0-9]|[01]?[0-9][0-9]?)$/.test(ipaddress)) {
-    return (true);
-  }
-  return (false);
-}
+        <div id="p_scents1">
 
-function validateFQDN(fqdn)
-{
-  if (/^([a-z0-9]+(-[a-z0-9]+)*\.)+[a-z]{2,}$/.test(fqdn)) {
-    return (true);
-  }  return (false);
+        </div>
+      </div>
+    </div>
+  </div>
+  <div class="row">
+    <div class="col-xs-12">
+      <div class="form-group">
+        <input id="dns" class="checkbox-custom" type="checkbox" name="dns">
+        <label for="dns">Configure DNS settings</label>
+      </div>
+      <div id = "dns-fields" class="form-horizontal">
+        <div class="form-group">
+          <label for="dns_server_1"class="control-label col-xs-3">Server 1</label>
+          <div class="col-xs-6">
+            <input type="text" class="form-control" id="dns_server_1" name="dns_server_1">
+          </div>
+            <span id="dns-addbutton" class="app-btn glyphicon glyphicon-plus-sign" aria-hidden="true"></span>
+        </div>
+        <div id="p_scents2">
 
-}
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+<div class="col-xs-12 text-center">
+  <button class="btn btn-primary" id="generateconfig" type="submit" name="submit"">Generate config file</button>
+</div>
 
-function validateNetmask(netmask)
-{
-  if (/^(254|252|248|240|224|192|128)\.0\.0\.0|255\.(254|252|248|240|224|192|128|0)\.0\.0|255\.255\.(254|252|248|240|224|192|128|0)\.0|255\.255\.255\.(254|252|248|240|224|192|128|0)$/.test(netmask)) {
-    return (true);
-  }
-  return (false);
-}
-
-
-function saveFile(filename, data) {
-  var blob = new Blob([data], {type: 'text/csv'});
-  if(window.navigator.msSaveOrOpenBlob) {
-    window.navigator.msSaveBlob(blob, filename);
-  }
-  else{
-    var elem = window.document.createElement('a');
-    elem.href = window.URL.createObjectURL(blob);
-    elem.download = filename;
-    document.body.appendChild(elem);
-    elem.click();
-    document.body.removeChild(elem);
-  }
-}
-
-$('#wifi-fields').hide();
-$('#wired-fields').hide();
-$('#dns-fields').hide();
-$('#ntp-fields').hide();
-$('#common_errors').hide();
-$('#wifi-no-dhcp-fields').hide();
-$('#wired-no-dhcp-fields').hide();
-$('input[name=wifidhcp]').prop('checked', 'checked');
-$('input[name=wireddhcp]').prop('checked', 'checked');
-
-$('input[name=wifi]').change(function() {
-  if($(this).is(':checked'))
-  {
-    console.log("wifi");
-    $('#wifi-fields').show();
-  }
-  else {
-    $('#wifi-fields').hide();
-  }
-});
-
-
-$('input[name=wifidhcp]').change(function() {
-  if($(this).is(':checked'))
-  {
-    console.log("wifidhcp");
-    $('#wifi-no-dhcp-fields').hide();
-  }
-  else {
-    $('#wifi-no-dhcp-fields').show();
-  }
-});
-
-$('input[name=wireddhcp]').change(function() {
-  if($(this).is(':checked'))
-  {
-    console.log("wireddhcp");
-    $('#wired-no-dhcp-fields').hide();
-  }
-  else {
-    $('#wired-no-dhcp-fields').show();
-  }
-});
-
-$('input[name=wired]').change(function() {
-  if($(this).is(':checked'))
-  {
-    console.log("wired");
-    $('#wired-fields').show();
-  }
-  else {
-    $('#wired-fields').hide();
-  }
-});
-$('input[name=ntp]').change(function() {
-  if($(this).is(':checked'))
-  {
-    console.log("ntp");
-    $('#ntp-fields').show();
-  }
-  else {
-    $('#ntp-fields').hide();
-  }
-});
-$('input[name=dns]').change(function() {
-  if($(this).is(':checked'))
-  {
-    console.log("dns");
-    $('#dns-fields').show();
-  }
-  else {
-    $('#dns-fields').hide();
-  }
-});
-
-$('#ntp-addbutton').click(function() {
-  var scntDiv = $('#p_scents1');
-  var i = 2;
-
-  if($('#p_scents1 .add-ntp-server') != undefined)
-  i = $('#p_scents1 .add-ntp-server').length + 2;
-  $('<div class="form-group add-ntp-server" id="row_ntp_server_' + i +'"><label for="ntp_server_' + i +'" class="control-label col-xs-3">Server ' + i +'</label><div class="col-xs-6"><input type="text" class="form-control" id="ntp_server_' + i +'" name="ntp_server_' + i +'"></div><span class="remove-button glyphicon glyphicon-minus-sign" id="ntp_remove_server_' + i +'"></span></div></div>').appendTo(scntDiv);
-  $('#ntp_remove_server_' + i).click(function() {
-    $('#row_ntp_server_'+ i).remove();
-    return false;
-  });
-  return false;
-});
-
-$('#dns-addbutton').click(function() {
-  var scntDiv = $('#p_scents2');
-  var i = 2;
-
-  if($('#p_scents2 .add-dns-server') != undefined)
-  i = $('#p_scents2 .add-dns-server').length + 2;
-  $('<div class="form-group add-dns-server" id="row_dns_server_' + i +'"><label for="dns_server_' + i +'" class="control-label col-xs-3">Server ' + i +'</label><div class="col-xs-6"><input type="text" class="form-control" id="dns_server_' + i +'" name="dns_server_' + i +'"></div><span class="remove-button glyphicon glyphicon-minus-sign" id="dns_remove_server_' + i +'"></span></div></div>').appendTo(scntDiv);
-  $('#dns_remove_server_' + i).click(function() {
-    $('#row_dns_server_'+ i).remove();
-    return false;
-  });
-  return false;
-});
-
-
-$('#generateconfig').click(function()
-{
-  $('.form-group').removeClass('has-error');
-  $('.help-block').remove();
-  $('#common_errors').hide();
-
-  var validation_errors = [];
-
-  var configStr = "";;
-  if($('#wifi').is(":checked") == false && $('#wired').is(":checked") == false)
-  {
-    validation_errors.push({'key':'common_error' , 'message': 'You must configure either a WiFi or wired interface.'});
-  }
-
-  if($('#wifi').is(":checked") == true)
-  {
-    if($('#ssid').val() == "")
-    {
-      validation_errors.push({'key': 'ssid' , 'message':'SSID is required'});
-
-    }
-
-    configStr = configStr + "[wlan0]";
-    configStr = configStr + "\r\n";
-    configStr = configStr + "ssid=" + $('#ssid').val() + "\r\n";
-    if($('#passphrase').val() != "")
-    configStr = configStr + "passphrase=" + $('#passphrase').val() + "\r\n";
-    if($('#wifidhcp').is(":checked") == true)
-    {
-      configStr = configStr + "mode=dhcp" + "\r\n";
-    }
-    else {
-      if(!validateIPaddress($('#wifiip').val()))
-      {
-        validation_errors.push({'key': 'wifiip' ,'message' : 'You have entered an invalid IP address.'});
-      }
-      if(!validateIPaddress($('#wifigateway').val()))
-      {
-        validation_errors.push({'key': 'wifigateway' ,'message' : 'You have entered an invalid IP address.'});
-      }
-      if(!validateNetmask($('#wifinetmask').val()))
-      {
-        validation_errors.push({'key': 'wifinetmask' ,'message' : 'You have entered an invalid netmask.'});
-      }
-      configStr = configStr + "ip=" + $('#wifiip').val() + "\r\n";
-      configStr = configStr + "netmask=" + $('#wifinetmask').val() + "\r\n";
-      configStr = configStr + "gateway=" + $('#wifigateway').val() + "\r\n";
-    }
-
-    if($('#hiddenssid').is(":checked") == true)
-    {
-      configStr = configStr + "hidden_ssid=true" + "\r\n";
-    }
-    configStr = configStr + "\r\n";
-  }
-
-  if($('#wired').is(":checked") == true)
-  {
-    configStr = configStr + "[eth0]";
-    configStr = configStr + "\r\n";
-    if($('#wireddhcp').is(":checked") == true)
-    {
-      configStr = configStr + "mode=dhcp" + "\r\n";
-    }
-    else {
-      if(!validateIPaddress($('#wiredip').val()))
-      {
-        validation_errors.push({'key': 'wiredip' ,'message' : 'You have entered an invalid IP address.'});
-      }
-      if(!validateIPaddress($('#wiredgateway').val()))
-      {
-        validation_errors.push({'key': 'wiredgateway' ,'message' : 'You have entered an invalid IP address.'});
-      }
-      if(!validateNetmask($('#wirednetmask').val()))
-      {
-        validation_errors.push({'key': 'wirednetmask' ,'message' : 'You have entered an invalid netmask.'});
-      }
-      configStr = configStr + "ip=" + $('#wiredip').val() + "\r\n";
-      configStr = configStr + "netmask=" + $('#wirednetmask').val() + "\r\n";
-      configStr = configStr + "gateway=" + $('#wiredgateway').val() + "\r\n";
-    }
-  }
-
-  if($('#ntp').is(":checked") == true || $('#dns').is(":checked") == true)
-  {
-    configStr = configStr + "\r\n";
-    configStr = configStr + "[generic]";
-    configStr = configStr + "\r\n";
-  }
-
-  if($('#ntp').is(":checked") == true)
-  {
-    configStr = configStr + "ntp=";
-    for(var i = 0; i < $('[id^="ntp_server_"]').length; i++)
-    {
-      var ntpid = "ntp_server_" + (i+1);
-      var itm = $('[id^="ntp_server_"]')[i];
-      if(validateIPaddress(itm.value) || validateFQDN(itm.value) )
-      {
-        if(i > 0)
-        {
-          configStr = configStr + ",";
-        }
-        configStr = configStr + itm.value;
-      }
-      else {
-        validation_errors.push({ "key": ntpid, 'message': 'You have entered an invalid IP address/FQDN' });
-      }
-
-    }
-    configStr = configStr + "\r\n";
-  }
-
-
-
-  if($('#dns').is(":checked") == true)
-  {
-    configStr = configStr + "dns=";
-
-    for(var i = 0; i < $('[id^="dns_server_"]').length; i++)
-    {
-      var itm = $('[id^="dns_server_"]')[i];
-      var dnsid = "dns_server_" + (i+1);
-      if(!validateIPaddress(itm.value))
-      {
-        validation_errors.push({ "key": dnsid, 'message': 'You have entered an invalid IP address' });
-      }
-      if(i > 0)
-      {
-        configStr = configStr + ",";
-      }
-      configStr = configStr + itm.value;
-    }
-    configStr = configStr + "\r\n";
-  }
-
-
-  var validation_errors_length = validation_errors.length;
-  for (var i = 0; i < validation_errors_length; i++) {
-    if(validation_errors[i].key == 'common_error')
-    {
-      $('#common_errors').show();
-      $('#common_errors').append('<p class="help-block">' + validation_errors[i].message + '</p>');
-    }
-    $('#' + validation_errors[i].key).closest('.form-group').addClass("has-error");
-    if(validation_errors[i].key.startsWith("dns_server_") || validation_errors[i].key.startsWith("ntp_server_"))
-    {
-      $('#' + validation_errors[i].key).closest('.form-group').append('<p class="col-xs-offset-3 col-md-offset-3 col-xs-6 help-block">' + validation_errors[i].message + '</p>');
-    }
-    else {
-      $('#' + validation_errors[i].key).closest('.form-group').append('<p class="col-md-offset-3 col-xs-6 help-block">' + validation_errors[i].message + '</p>');
-    }
-
-  }
-
-  if(validation_errors_length == 0)
-  {
-    if(configStr.length > 5)
-    {
-      alert("Your config file is almost ready!\n\nYour browser will start to download the file as soon as you press OK below. Save the file on to the boot partition of your SD card and make sure to name it network.ini\n\n");
-      saveFile("network.ini", configStr);
-    }
-    else {
-      alert("Please select options before generating configuration");
-    }
-  }
-});
-
-</script>
-</html>
+<div class="modal fade" id="saveModal" role="dialog">
+  <div class="modal-dialog">
+    <div class="modal-content">
+      <div class="modal-header">
+        <button type="button" class="close" data-dismiss="modal">&times;</button>
+        <h4 class="modal-title">Save configuration file</h4>
+      </div>
+      <div class="modal-body">
+        <p id="save-modal-text"></p>
+      </div>
+      <div class="modal-footer">
+        <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+      </div>
+    </div>
+  </div>
+</div>
