@@ -1,1 +1,1 @@
-# tehmoose.github.io
+# wizard.screenly.io
