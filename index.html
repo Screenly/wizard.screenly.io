@@ -14,153 +14,155 @@ title: Screenly Configuration Wizard (Beta)
         </div>
       </div>
       <div class="jumbotron">
-        <p>Screenly Configuration Wizard is a tool for help generating <code>network.ini</code> files, which are used in <a href='https://www.screenly.io'>Screenly Pro</a> to configure things like networking and DNS on your Raspberry Pi.</p>
+        <p>Screenly Configuration Wizard is a tool for help generating a network configuration file, which are used in <a href='https://www.screenly.io'>Screenly Pro</a> to configure things like networking and DNS on your Raspberry Pi.</p>
       </div>
       <div class="row">
         <div class="col-md-6">
           <div class="form-group">
-            <input id="screenlyv1" name="screenlyversion" value="v1" type="radio">
+            <input id="screenlyv1" name="screenlyversion" value="v1" type="radio" title="Select for the current production version of Screenly Pro">
             <label for="screenlyv1">Screenly v1</label>
           </div>
         </div>
         <div class="col-md-6">
           <div class="form-group">
-            <input id="screenlyv2" name="screenlyversion" value="v2" type="radio">
+            <input id="screenlyv2" name="screenlyversion" value="v2" type="radio" title="Select for the next generation player (a.k.a. Screenly v2)">
             <label for="screenlyv2">Screenly v2</label>
           </div>
         </div>
       </div>
-      <div class="row">
-        <div class="col-md-12">
-          <div class="form-group">
-            <input id = "wifi" type="checkbox" name="wifi">
-            <label for = "wifi" >Configure WiFi</label>
-          </div>
-        </div>
-        <div id = "wifi-fields" class="form-horizontal">
+      <div id="config-options">
+        <div class="row">
           <div class="col-md-12">
             <div class="form-group">
-              <label for="ssid" class="control-label col-md-3">SSID</label>
-              <div class="col-md-6">
-                <input type="text" class="form-control" id="ssid" name="ssid">
+              <input id = "wifi" type="checkbox" name="wifi">
+              <label for = "wifi" >Configure WiFi</label>
+            </div>
+          </div>
+          <div id = "wifi-fields" class="form-horizontal">
+            <div class="col-md-12">
+              <div class="form-group">
+                <label for="ssid" class="control-label col-md-3">SSID</label>
+                <div class="col-md-6">
+                  <input type="text" class="form-control" id="ssid" name="ssid">
+                </div>
+              </div>
+              <div class="form-group">
+                <label for="passphrase"class="control-label col-md-3">Passphrase</label>
+                <div class="col-md-6">
+                  <input type="text" class="form-control" id="passphrase" name="passphrase">
+                </div>
               </div>
             </div>
-            <div class="form-group">
-              <label for="passphrase"class="control-label col-md-3">Passphrase</label>
-              <div class="col-md-6">
-                <input type="text" class="form-control" id="passphrase" name="passphrase">
+
+            <div class="col-md-12">
+              <div class="form-group">
+                <input id = "wifidhcp" type="checkbox" name="wifidhcp">
+                <label for = "wifidhcp">Use DHCP</label>
+              </div>
+              <div id="wifi-no-dhcp-fields">
+                <div class="form-group">
+                  <label for="ssid" class="control-label col-md-3">IP</label>
+                  <div class="col-md-6">
+                    <input type="text" class="form-control" id="wifiip" name="wifiip">
+                  </div>
+                </div>
+                <div class="form-group">
+                  <label for="netmask"class="control-label col-md-3">Netmask</label>
+                  <div class="col-md-6">
+                    <input type="text" class="form-control" id="wifinetmask" name="wifinetmask">
+                  </div>
+                </div>
+                <div class="form-group">
+                  <label for="gateway"class="control-label col-md-3">Gateway</label>
+                  <div class="col-md-6">
+                    <input type="text" class="form-control" id="wifigateway" name="wifigateway">
+                  </div>
+                </div>
+              </div>
+            </div>
+            <div class="col-md-12">
+              <div class="form-group">
+                <input id = "hiddenssid" type="checkbox" name="hiddenssid" />
+                <label for="hiddenssid">Hidden SSID</label>
               </div>
             </div>
           </div>
+        </div>
 
+        <div class="row">
           <div class="col-md-12">
             <div class="form-group">
-              <input id = "wifidhcp" type="checkbox" name="wifidhcp">
-              <label for = "wifidhcp">Use DHCP</label>
+              <input id = "wired" type="checkbox" name="wired">
+              <label for = "wired" >Configure wired connection</label>
             </div>
-            <div id="wifi-no-dhcp-fields">
+          </div>
+          <div id = "wired-fields" class="form-horizontal">
+            <div class="col-md-12">
               <div class="form-group">
-                <label for="ssid" class="control-label col-md-3">IP</label>
-                <div class="col-md-6">
-                  <input type="text" class="form-control" id="wifiip" name="wifiip">
-                </div>
+                <input id = "wireddhcp" type="checkbox" name="wireddhcp">
+                <label for = "wireddhcp">Use DHCP</label>
               </div>
-              <div class="form-group">
-                <label for="netmask"class="control-label col-md-3">Netmask</label>
-                <div class="col-md-6">
-                  <input type="text" class="form-control" id="wifinetmask" name="wifinetmask">
+              <div id="wired-no-dhcp-fields">
+                <div class="form-group">
+                  <label for="ssid" class="control-label col-md-3">IP</label>
+                  <div class="col-md-6">
+                    <input type="text" class="form-control" id="wiredip" name="wiredip">
+                  </div>
                 </div>
-              </div>
-              <div class="form-group">
-                <label for="gateway"class="control-label col-md-3">Gateway</label>
-                <div class="col-md-6">
-                  <input type="text" class="form-control" id="wifigateway" name="wifigateway">
+                <div class="form-group">
+                  <label for="netmask"class="control-label col-md-3">Netmask</label>
+                  <div class="col-md-6">
+                    <input type="text" class="form-control" id="wirednetmask" name="wirednetmask">
+                  </div>
+                </div>
+                <div class="form-group">
+                  <label for="gateway"class="control-label col-md-3">Gateway</label>
+                  <div class="col-md-6">
+                    <input type="text" class="form-control" id="wiredgateway" name="wiredgateway">
+                  </div>
                 </div>
               </div>
             </div>
           </div>
+        </div>
+        <div class="row" id="ntp-row">
           <div class="col-md-12">
             <div class="form-group">
-              <input id = "hiddenssid" type="checkbox" name="hiddenssid" />
-              <label for="hiddenssid">Hidden SSID</label>
+              <input id="ntp" class="checkbox-custom" type="checkbox" name="ntp">
+              <label for="ntp">Configure NTP settings</label>
+            </div>
+            <div id = "ntp-fields" class="form-horizontal">
+              <div class="form-group">
+                <label for="ntp_server_1" class="control-label col-xs-3">Server 1</label>
+                <div class="col-xs-6">
+                  <input type="text" class="form-control" id="ntp_server_1" name="ntp_server_1">
+                </div>
+                <span id="ntp-addbutton"  class="glyphicon glyphicon-plus-sign" aria-hidden="true"></span>
+              </div>
+
+              <div id="p_scents1">
+
+              </div>
             </div>
           </div>
         </div>
-      </div>
-
-      <div class="row">
-        <div class="col-md-12">
-          <div class="form-group">
-            <input id = "wired" type="checkbox" name="wired">
-            <label for = "wired" >Configure wired connection</label>
-          </div>
-        </div>
-        <div id = "wired-fields" class="form-horizontal">
+        <div class="row">
           <div class="col-md-12">
             <div class="form-group">
-              <input id = "wireddhcp" type="checkbox" name="wireddhcp">
-              <label for = "wireddhcp">Use DHCP</label>
+              <input id="dns" class="checkbox-custom" type="checkbox" name="dns">
+              <label for="dns">Configure DNS settings</label>
             </div>
-            <div id="wired-no-dhcp-fields">
+            <div id = "dns-fields" class="form-horizontal">
               <div class="form-group">
-                <label for="ssid" class="control-label col-md-3">IP</label>
-                <div class="col-md-6">
-                  <input type="text" class="form-control" id="wiredip" name="wiredip">
+                <label for="dns_server_1"class="control-label col-xs-3">Server 1</label>
+                <div class="col-xs-6">
+                  <input type="text" class="form-control" id="dns_server_1" name="dns_server_1">
                 </div>
+                  <span id="dns-addbutton" class="glyphicon glyphicon-plus-sign" aria-hidden="true"></span>
               </div>
-              <div class="form-group">
-                <label for="netmask"class="control-label col-md-3">Netmask</label>
-                <div class="col-md-6">
-                  <input type="text" class="form-control" id="wirednetmask" name="wirednetmask">
-                </div>
-              </div>
-              <div class="form-group">
-                <label for="gateway"class="control-label col-md-3">Gateway</label>
-                <div class="col-md-6">
-                  <input type="text" class="form-control" id="wiredgateway" name="wiredgateway">
-                </div>
-              </div>
-            </div>
-          </div>
-        </div>
-      </div>
-      <div class="row">
-        <div class="col-md-12">
-          <div class="form-group">
-            <input id="ntp" class="checkbox-custom" type="checkbox" name="ntp">
-            <label for="ntp">Configure NTP settings</label>
-          </div>
-          <div id = "ntp-fields" class="form-horizontal">
-            <div class="form-group">
-              <label for="ntp_server_1" class="control-label col-xs-3">Server 1</label>
-              <div class="col-xs-6">
-                <input type="text" class="form-control" id="ntp_server_1" name="ntp_server_1">
-              </div>
-              <span id="ntp-addbutton"  class="glyphicon glyphicon-plus-sign" aria-hidden="true"></span>
-            </div>
+              <div id="p_scents2">
 
-            <div id="p_scents1">
-
-            </div>
-          </div>
-        </div>
-      </div>
-      <div class="row">
-        <div class="col-md-12">
-          <div class="form-group">
-            <input id="dns" class="checkbox-custom" type="checkbox" name="dns">
-            <label for="dns">Configure DNS settings</label>
-          </div>
-          <div id = "dns-fields" class="form-horizontal">
-            <div class="form-group">
-              <label for="dns_server_1"class="control-label col-xs-3">Server 1</label>
-              <div class="col-xs-6">
-                <input type="text" class="form-control" id="dns_server_1" name="dns_server_1">
               </div>
-                <span id="dns-addbutton" class="glyphicon glyphicon-plus-sign" aria-hidden="true"></span>
-            </div>
-            <div id="p_scents2">
-
             </div>
           </div>
         </div>

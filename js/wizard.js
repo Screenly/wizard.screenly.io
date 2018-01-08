@@ -47,6 +47,9 @@ function saveFile(filename, data) {
   }
 }
 
+$('input[name=screenlyversion]').prop('checked', false);
+$('#config-options').hide();
+
 $('#wifi-fields').hide();
 $('#wired-fields').hide();
 $('#dns-fields').hide();
@@ -56,21 +59,31 @@ $('#wifi-no-dhcp-fields').hide();
 $('#wired-no-dhcp-fields').hide();
 $('input[name=wifidhcp]').prop('checked', 'checked');
 $('input[name=wireddhcp]').prop('checked', 'checked');
-$('input[id=screenlyv1]').prop('checked', 'checked');
+
+var screenlyVersion = 0;
 
 $('input[name=screenlyversion]').change(function() {
   console.log("Screenly version changed");
-  var ntp = document.getElementById("ntp")
+
   if($('input[id=screenlyv1]').is(':checked'))
   {
     console.log("Screenly v1 is selected");
-    ntp.disabled = false;
+    screenlyVersion = 1;
+    $('#config-options').show();
+    $('#ntp-row').show();
+  }
+  else if($('input[id=screenlyv2]').is(':checked'))
+  {
+    console.log("Screenly v2 is selected");
+    screenlyVersion = 2;
+    $('#config-options').show();
+    $('#ntp-row').hide();
   }
   else
   {
-    console.log("Screenly v2 is selected");
-    ntp.disabled = true;
-    $('#ntp-fields').hide();
+    console.log("No Screenly version is selected");
+    screenlyVersion = 0;
+    $('#config-options').hide();
   }
 });
 
@@ -415,19 +428,21 @@ $('#generateconfig').click(function()
 
   if(validation_errors_length == 0)
   {
-    if(v1Str.length > 5)
+    if(v1Str.length > 5 && screenlyVersion != 0) 
     {
-      if($('input[id=screenlyv1]').is(':checked'))
+      if(screenlyVersion == 1)
       {
         var configStr = v1Str;
         var configFileName = "network.ini"
+        var alertMessage = "Your config file is almost ready!\n\nYour browser will start to download the file as soon as you press OK below. Save the file on to the boot partition of your SD card and make sure to name it " + configFileName + "\n\n";
       }
       else
       {
         var configStr = v2Str;
         var configFileName = "network.yaml"
+        var alertMessage = "Your config file is almost ready!\n\nYour browser will start to download the file as soon as you press OK below. Save the file onto a USB stick and insert it into your Raspberry Pi. \n\n";
       }
-      alert("Your config file is almost ready!\n\nYour browser will start to download the file as soon as you press OK below. Save the file on to the boot partition of your SD card and make sure to name it " + configFileName + "\n\n");
+      alert(alertMessage);
       saveFile(configFileName, configStr);
     }
     else {
