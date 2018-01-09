@@ -1,6 +1,7 @@
 ---
 layout: default
 title: Screenly Configuration Wizard (Beta)
+permalink: /
 ---
 
 <div class="row">
@@ -18,14 +19,16 @@ title: Screenly Configuration Wizard (Beta)
 <div class="row">
   <div class="col-md-6">
     <div class="form-group">
-      <input id="screenlyv1" name="screenlyversion" value="v1" type="radio" title="Select for the current production version of Screenly Pro">
+      <input id="screenlyv1" name="screenlyversion" value="v1" type="radio">
       <label for="screenlyv1">Screenly v1</label>
+      <p>Select for the current production version of Screenly Pro</p>
     </div>
   </div>
   <div class="col-md-6">
     <div class="form-group">
-      <input id="screenlyv2" name="screenlyversion" value="v2" type="radio" title="Select for the next generation player (a.k.a. Screenly v2)">
+      <input id="screenlyv2" name="screenlyversion" value="v2" type="radio">
       <label for="screenlyv2">Screenly v2</label>
+      <p>Select for the next generation player (a.k.a. Screenly v2)</p>
     </div>
   </div>
 </div>
@@ -167,7 +170,7 @@ title: Screenly Configuration Wizard (Beta)
   </div>
 </div>
 <div class="col-xs-12 text-center">
-  <button class="btn btn-primary" id="generateconfig" type="submit" name="submit"">Generate config file</button>
+  <button class="btn btn-primary" id="generateconfig" type="submit" name="submit">Generate config file</button>
 </div>
 
 <div class="modal fade" id="saveModal" role="dialog">
