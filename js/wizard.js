@@ -319,7 +319,7 @@ $('#generateconfig').click(function()
   }
 
   // Filling the data for v2 configuration
-  
+
   if(has_wired == true) {
     var ethConfig = "";
 
@@ -359,10 +359,7 @@ $('#generateconfig').click(function()
   if(has_wifi == true) {
 
     v2Str += "  wifis:\r\n";
-    v2Str += "    all-wlans:\r\n";
-    v2Str += "      match:\r\n";
-    v2Str += "        name: \"wl*\"\r\n";  // This will match both old (wlan0) and newer (wlp7s0) naming schemas
-
+    v2Str += "    wlan0:\r\n";
     v2Str += "      access-points:\r\n";
     v2Str += "        \"" + wifi_ssid + "\":\r\n";
 
@@ -411,7 +408,7 @@ $('#generateconfig').click(function()
 
   if(validation_errors_length == 0)
   {
-    if(v1Str.length > 5 && screenlyVersion != 0) 
+    if(v1Str.length > 5 && screenlyVersion != 0)
     {
       var saveModalText = "Please select options before generating configuration";
       if(screenlyVersion == 1)
