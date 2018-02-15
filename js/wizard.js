@@ -368,6 +368,8 @@ $('#generateconfig').click(function()
 
     if(wifi_passphrase != "" || wifi_hidden_ssid) {
       v2Str += "          password: \"" + wifi_passphrase + "\"\r\n";
+    } else {
+      v2Str += "          {}\r\n"
     }
 
     if(wifi_dhcp == true) {
