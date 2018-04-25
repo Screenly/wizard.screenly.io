@@ -178,9 +178,9 @@ $('#generateconfig').click(function()
   var v2Str = "network:\r\n  version: 2\r\n";
 
   var has_wifi = $('#wifi').is(":checked");
-  var wifi_ssid = $('#ssid').val();
+  var wifi_ssid = $('#ssid').val().replace("\"", "\\\"");
   var wifi_hidden_ssid = $('#hiddenssid').is(":checked");
-  var wifi_passphrase = $('#passphrase').val();
+  var wifi_passphrase = $('#passphrase').val().replace("\"", "\\\"");
   var wifi_dhcp = $('#wifidhcp').is(":checked");
   var wifi_ip = $('#wifiip').val();
   var wifi_gw = $('#wifigateway').val();
@@ -319,7 +319,7 @@ $('#generateconfig').click(function()
   }
 
   // Filling the data for v2 configuration
-  
+
   if(has_wired == true) {
     var ethConfig = "";
 
@@ -411,7 +411,7 @@ $('#generateconfig').click(function()
 
   if(validation_errors_length == 0)
   {
-    if(v1Str.length > 5 && screenlyVersion != 0) 
+    if(v1Str.length > 5 && screenlyVersion != 0)
     {
       var saveModalText = "Please select options before generating configuration";
       if(screenlyVersion == 1)
