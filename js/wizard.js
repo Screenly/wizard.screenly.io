@@ -178,9 +178,9 @@ $('#generateconfig').click(function()
   var v2Str = "network:\r\n  version: 2\r\n";
 
   var has_wifi = $('#wifi').is(":checked");
-  var wifi_ssid = $('#ssid').val();
+  var wifi_ssid = $('#ssid').val().replace("\"", "\\\"");
   var wifi_hidden_ssid = $('#hiddenssid').is(":checked");
-  var wifi_passphrase = $('#passphrase').val();
+  var wifi_passphrase = $('#passphrase').val().replace("\"", "\\\"");
   var wifi_dhcp = $('#wifidhcp').is(":checked");
   var wifi_ip = $('#wifiip').val();
   var wifi_gw = $('#wifigateway').val();
