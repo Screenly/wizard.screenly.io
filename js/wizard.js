@@ -1,3 +1,5 @@
+// -*- js-indent-level: 2 -*-
+
 function validateIPaddress(ipaddress) {
   return (/^(25[0-5]|2[0-4][0-9]|[01]?[0-9][0-9]?)\.(25[0-5]|2[0-4][0-9]|[01]?[0-9][0-9]?)\.(25[0-5]|2[0-4][0-9]|[01]?[0-9][0-9]?)\.(25[0-5]|2[0-4][0-9]|[01]?[0-9][0-9]?)$/.test(ipaddress));
 }
@@ -52,21 +54,21 @@ $('input[name=screenlyversion]').change(function() {
   {
     console.log("Screenly v1 is selected");
     screenlyVersion = 1;
-    $('#config-options').show();
-    $('#ntp-row').show();
   }
-  else if($('input[id=screenlyv2]').is(':checked'))
-  {
+  else if($('input[id=screenlyv2]').is(':checked')) {
     console.log("Screenly v2 is selected");
     screenlyVersion = 2;
-    $('#config-options').show();
-    $('#ntp-row').hide();
   }
   else
   {
     console.log("No Screenly version is selected");
     screenlyVersion = 0;
+  }
+
+  if(screenlyVersion == 0) {
     $('#config-options').hide();
+  } else {
+    $('#config-options').show();
   }
 });
 
@@ -175,7 +177,7 @@ $('#generateconfig').click(function()
   var validation_errors = [];
 
   var v1Str = "";
-  var v2Str = "network:\r\n  version: 2\r\n";
+  var v2Str = "";
 
   var has_wifi = $('#wifi').is(":checked");
   var wifi_ssid = $('#ssid').val().replace("\"", "\\\"");
@@ -198,8 +200,11 @@ $('#generateconfig').click(function()
   var has_custom_dns = $('#dns').is(":checked");
   var dns_server_list = [];
 
-  if(has_wifi == false && has_wired == false) {
+  if(screenlyVersion == 1 && has_wifi == false && has_wired == false) {
     validation_errors.push({'key':'common_error' , 'message': 'You must configure either a WiFi or wired interface.'});
+  }
+  else if(screenlyVersion == 2 && has_wifi == false && has_wired == false && has_custom_ntp == false) {
+    validation_errors.push({'key':'common_error' , 'message': 'You must configure either a WiFi or wired interface or NTP settings.'});
   }
 
   if(has_custom_ntp == true) {
@@ -320,6 +325,11 @@ $('#generateconfig').click(function()
 
   // Filling the data for v2 configuration
 
+  if(has_wired == true || has_wifi == true) {
+    v2Str += "network:\r\n";
+    v2Str += "  version: 2\r\n";
+  }
+
   if(has_wired == true) {
     var ethConfig = "";
 
@@ -388,6 +398,20 @@ $('#generateconfig').click(function()
       }
       v2Str += "]\r\n";
     }
+  }
+
+  if(has_custom_ntp == true) {
+    v2Str += "ntp:";
+    if(ntp_server_list.length == 0) {
+      v2Str += " []"
+    } else {
+      for(var i = 0; i < ntp_server_list.length; i++) {
+        v2Str += "\r\n  - ";
+        v2Str += ntp_server_list[i];
+      }
+    }
+
+    v2Str += "\r\n";
   }
 
   var validation_errors_length = validation_errors.length;
