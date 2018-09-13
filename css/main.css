@@ -40,3 +40,7 @@ span.glyphicon:hover {
     vertical-align: middle;
     margin-top: 5px;
 }
+
+.checkbox-custom#network-manager {
+    vertical-align: top;
+}
