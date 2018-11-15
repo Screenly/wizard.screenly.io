@@ -343,9 +343,6 @@ $('#generateconfig').click(function()
     var ethConfig = "";
 
     v2Str += "  ethernets:\r\n";
-    v2Str += "    all-en:\r\n";
-    v2Str += "      match:\r\n";
-    v2Str += "        name: \"en*\"\r\n";
 
     if(wired_dhcp == true) {
       ethConfig += "      dhcp4: true\r\n";
@@ -367,11 +364,7 @@ $('#generateconfig').click(function()
       ethConfig += "]\r\n";
     }
 
-    v2Str += ethConfig;
-
-    v2Str += "    all-eth:\r\n";
-    v2Str += "      match:\r\n";
-    v2Str += "        name: \"eth*\"\r\n";
+    v2Str += "    eth0:\r\n";
     v2Str += ethConfig;
   }
 
