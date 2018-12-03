@@ -41,6 +41,6 @@ span.glyphicon:hover {
     margin-top: 5px;
 }
 
-.checkbox-custom#network-manager {
+.checkbox-custom#disable-network-manager {
     vertical-align: top;
 }

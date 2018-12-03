@@ -56,12 +56,12 @@ $('input[name=screenlyversion]').change(function() {
   {
     console.log("Screenly v1 is selected");
     screenlyVersion = 1;
-    $('#network-manager-row').hide()
+    $('#disable-network-manager-row').hide()
   }
   else if($('input[id=screenlyv2]').is(':checked')) {
     console.log("Screenly v2 is selected");
     screenlyVersion = 2;
-    $('#network-manager-row').show()
+    $('#disable-network-manager-row').show()
   }
   else
   {
@@ -204,7 +204,7 @@ $('#generateconfig').click(function()
   var has_custom_dns = $('#dns').is(":checked");
   var dns_server_list = [];
 
-  var has_network_manager = $('#network-manager').is(":checked");
+  var has_disable_network_manager = $('#disable-network-manager').is(":checked");
 
   if(screenlyVersion == 1 && has_wifi == false && has_wired == false) {
     validation_errors.push({'key':'common_error' , 'message': 'You must configure either a WiFi or wired interface.'});
@@ -334,7 +334,7 @@ $('#generateconfig').click(function()
   if(has_wired == true || has_wifi == true) {
     v2Str += "network:\r\n";
     v2Str += "  version: 2\r\n";
-    if(has_network_manager) {
+    if(!(has_disable_network_manager)) {
       v2Str += "  renderer: NetworkManager\r\n";
     }
   }
